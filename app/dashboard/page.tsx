@@ -99,15 +99,15 @@ export default function Dashboard() {
     }));
 
   return (
-    <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div className="relative w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 grid grid-cols-1 md:grid-cols-2 gap-6">
       <Button
         onClick={() => router.push("/")}
-        className="absolute top-8 right-10 bg-black text-white hover:bg-neutral-800 transition"
+        className="absolute top-4 right-4 sm:top-8 sm:right-10 bg-black text-white hover:bg-neutral-800 transition"
       >
         Add
       </Button>
 
-      <Card className="bg-white rounded-xl shadow border border-gray-200 p-4">
+      <Card className="bg-white rounded-xl shadow border border-gray-200 p-4 min-w-0">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-800">
             Spending Distribution by Category
@@ -151,7 +151,7 @@ export default function Dashboard() {
         </CardContent>
       </Card>
 
-      <Card className="bg-white rounded-xl shadow border border-gray-200 p-4 flex flex-col gap-4">
+      <Card className="bg-white rounded-xl shadow border border-gray-200 p-4 flex flex-col gap-4 min-w-0">
         <CardHeader>
           <CardTitle className="text-lg font-semibold text-gray-800">
             Monthly Budget & Tracking
