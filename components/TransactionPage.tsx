@@ -16,26 +16,19 @@ export interface Transaction {
 
 export default function Transactions() {
   const [transactions, setTransactions] = useState<Transaction[]>([]);
-  const [loading, setLoading] = useState(false);
 
   const fetchTransactions = async () => {
     try {
-      setLoading(true);
       const res = await axios.get(`${BACKEND_URL}/api/transaction`);
       setTransactions(res.data.response);
     } catch (error) {
       console.error("Error fetching transactions:", error);
-    } finally {
-      setLoading(false);
     }
   };
 
   useEffect(() => {
     fetchTransactions();
   }, []);
-  if (loading) {
-    return <>Loading</>;
-  }
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 min-h-[90vh] flex flex-col bg-gradient-to-b from-gray-50 to-white">
