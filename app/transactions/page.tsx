@@ -1,6 +1,4 @@
-import TransactionList from "@/components/TransactionList";
-
-export default function () {
+export default function TransactionList() {
   return (
     <>
       <div className="flex justify-center">
