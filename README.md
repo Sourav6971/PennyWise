@@ -1,36 +1,191 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Getting Started
+# 🪙 Expense Tracker SaaS
 
-First, run the development server:
+A **clean, minimal expense tracking SaaS** that allows users to add, edit, delete transactions, manage category-wise budgets, and visualize spending with pie and bar charts.
+
+Built with:
+- **Next.js 14 App Router + TypeScript**
+- **MongoDB with Mongoose**
+- **Shadcn UI + Tailwind CSS**
+- **Recharts** for clean data visualization
+- **Sonner** for toasts
+
+---
+
+##  Features
+
+-> Add, edit, delete transactions  
+-> Category-wise budget setting & tracking  
+-> Pie chart: Spending distribution by category  
+-> Bar chart: Monthly category-wise expenses  
+-> Mobile-friendly, clean UI  
+-> Environment-based backend URL support  
+
+
+
+##  Folder Structure
+
+```bash
+app/
+  api/
+    transaction/        # Transaction CRUD API routes
+    budget/             # Budget CRUD API routes
+components/
+  BarComponent.tsx      # Bar chart
+  CategoryBar.tsx       # Sidebar
+  TransactionPage.tsx   # Transaction management UI
+  ui/                   # Shadcn components
+public/
+styles/
+````
+
+---
+
+##  Installation & Setup
+
+### 1️ Clone the repository
+
+```bash
+git clone https://github.com/Sourav6971/PennyWise.git
+```
+
+### 2️ Install dependencies
+
+```bash
+npm install
+```
+
+### 3 Add environment variables
+
+Create a `.env` file in the root:
+
+```
+MONGO_URL=<your_mongodb_uri>
+```
+
+### 4️ Run the development server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Access the app at [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+##  API Endpoints
 
-## Learn More
+### Transactions
 
-To learn more about Next.js, take a look at the following resources:
+####  Add Transaction
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+* **POST** `/api/transaction`
+* **Body:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```json
+{
+  "amount": "1000",
+  "description": "Groceries",
+  "category": "food"
+}
+```
 
-## Deploy on Vercel
+* **Response:** `{ "msg": "Transaction added!" }`
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+####  Get All Transactions
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+* **GET** `/api/transaction`
+* **Response:** `{ "response": [ { _id, amount, description, category, updatedAt } ] }`
+
+####  Update Transaction
+
+* **PUT** `/api/transaction`
+* **Body:**
+
+```json
+{
+  "id": "transaction_id",
+  "amount": "1200",
+  "description": "Weekly Groceries",
+  "category": "food"
+}
+```
+
+* **Response:** `{ "msg": "Data updated!" }`
+
+####  Delete Transaction
+
+* **DELETE** `/api/transaction`
+* **Body:**
+
+```json
+{
+  "id": "transaction_id"
+}
+```
+
+* **Response:** `{ "msg": "Transaction deleted!" }`
+
+---
+
+### Budgets
+
+####  Set/Update Budget
+
+* **POST** `/api/budget`
+* **Body:**
+
+```json
+{
+  "category": "utilities",
+  "amount": "3000"
+}
+```
+
+* **Response:** `{ "msg": "Budget updated successfully" }`
+
+####  Get All Budgets
+
+* **GET** `/api/budget`
+* **Response:**
+
+```json
+{
+  "response": {
+    "housing": 2000,
+    "utilities": 3000,
+    "food": 4000,
+    "transportation": 1500,
+    "healthMedical": 1000
+  }
+}
+```
+
+---
+
+## Usage Flow
+
+1️⃣ Navigate to [http://localhost:3000](http://localhost:3000).
+2️⃣ Add transactions using the **Add Transaction** form on the Home page.
+3️⃣ Go to **Dashboard**:
+
+* Set budgets per category.
+* View spending vs budget progress bars.
+* View spending distribution in a pie chart.
+  4️⃣ View **Bar Chart** for monthly category-wise spending analysis.
+  5️⃣ Edit or delete transactions easily.
+
+---
+
+## ✨ Contributing
+
+Pull requests and feature improvements are welcome! For major changes, please open an issue first.
+
+---
+
+## 📄 License
+
+MIT
+
+---
+
