@@ -38,7 +38,7 @@ export default function ExpenseForm({ onTransactionAdded }: Props) {
     try {
       await axios.post(`${BACKEND_URL}/api/`, formData);
       setFormData({ amount: "", description: "", category: "" });
-      onTransactionAdded(); // refresh transactions in parent
+      onTransactionAdded();
     } catch (error) {
       console.error("Error adding transaction:", error);
     }
@@ -47,7 +47,7 @@ export default function ExpenseForm({ onTransactionAdded }: Props) {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-white rounded-2xl p-6 md:p-8 shadow-md space-y-5 w-full md:w-80"
+      className="bg-white rounded-2xl p-4 sm:p-6 md:p-8 shadow-md space-y-5 w-full max-w-sm"
     >
       <h2 className="text-lg font-semibold text-center text-gray-800">
         Add Expense
