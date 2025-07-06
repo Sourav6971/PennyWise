@@ -1,4 +1,4 @@
-export default function TransactionList() {
+export default function Transactions() {
   return (
     <>
       <div className="flex justify-center">
