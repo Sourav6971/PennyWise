@@ -1,21 +1,12 @@
+import { Data } from "@/db";
 import { NextRequest, NextResponse } from "next/server";
 import z from "zod";
-import { Data } from "../db";
 
 const dataSchema = z.object({
   amount: z.string().trim(),
   description: z.string().trim(),
   category: z.string().trim(),
 });
-
-export async function GET() {
-  try {
-    const response = await Data.find({});
-    return NextResponse.json({ response }, { status: 200 });
-  } catch {
-    return NextResponse.json({ msg: "Could not fetch data" }, { status: 500 });
-  }
-}
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -52,24 +43,30 @@ export async function POST(req: NextRequest) {
 }
 
 export async function PUT(req: NextRequest) {
-  const { id, amount, category, description } = await req.json();
   try {
-    const response = await Data.findOne({ _id: id });
-    if (!response) {
-      return NextResponse.json({ msg: "Data does not exist" }, { status: 404 });
-    }
-    await Data.updateOne({
-      id: id,
+    const { id, amount, category, description } = await req.json();
 
-      $set: {
+    const updated = await Data.findByIdAndUpdate(
+      id,
+      {
         amount,
         category,
         description,
-        date: Date.now,
+        date: Date.now(),
       },
-    });
-    return NextResponse.json({ msg: "Data updated!" }, { status: 200 });
-  } catch {
+      { new: true }
+    );
+
+    if (!updated) {
+      return NextResponse.json({ msg: "Data not found" }, { status: 404 });
+    }
+
+    return NextResponse.json(
+      { msg: "Data updated!", updated },
+      { status: 200 }
+    );
+  } catch (error) {
+    console.error("Error updating data:", error);
     return NextResponse.json({ msg: "Could not update data" }, { status: 500 });
   }
 }
