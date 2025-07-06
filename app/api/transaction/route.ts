@@ -2,7 +2,6 @@ import { NextResponse } from "next/server";
 
 import { Data } from "@/db";
 
-// GET: Fetch all transactions
 export async function GET() {
   try {
     const transactions = await Data.find().sort({ updatedAt: -1 });

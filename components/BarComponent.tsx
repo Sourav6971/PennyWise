@@ -21,7 +21,7 @@ const categoryLabels: Record<string, string> = {
   "health-medical": "Health & Medical",
 };
 
-function processData(transactions: Transaction[]): any[] {
+function processData(transactions: Transaction[]) {
   const categories = Object.keys(categoryLabels);
   const aggregation: Record<string, number> = {};
 
